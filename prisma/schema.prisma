@@ -32,7 +32,6 @@ model Event {
   description String?
   dueDate     DateTime
   priority    Priority
-  isCompleted Boolean   @default(false)
   isDeleted   Boolean   @default(false)
   userId      Int
 }

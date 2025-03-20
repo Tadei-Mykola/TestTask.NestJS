@@ -1,11 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
   const config = new DocumentBuilder()
     .setTitle('API Documentation')
     .setDescription('The API description')
@@ -27,5 +28,6 @@ async function bootstrap(): Promise<void> {
     },
   });
   await app.listen(3000);
+  console.log('Swagger is running on http://localhost:3000/api');
 }
 bootstrap();
